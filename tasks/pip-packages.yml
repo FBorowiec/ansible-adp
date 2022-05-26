@@ -1,0 +1,31 @@
+---
+- name: Install python lsp server
+  pip:
+    name: 'python-lsp-server[all]'
+    executable: pip3
+  tags:
+    - python
+- name: Install other deps
+  pip:
+    name: ["poppler-utils", "thefuck"]
+    executable: pip3
+  tags:
+    - python
+- name: Neovim deps part 1
+  pip:
+    name: ["pynvim", "pylint", "pycodestyle", "pydocstyle", "jedi", "mypy"]
+    executable: pip3
+  tags:
+    - python
+- name: Neovim deps part 2
+  pip:
+    name: ["pylsp-mypy", "black", "python-lsp-black", "flake8", "pyls-flake8"]
+    executable: pip3
+  tags:
+    - python
+- name: Neovim deps part 3
+  pip:
+    name: ["isort", "pyls-isort", "rope", "pylsp-rope"]
+    executable: pip3
+  tags:
+    - python

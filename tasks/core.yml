@@ -1,0 +1,96 @@
+---
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: true
+    update_cache: true
+  tags:
+    - core
+- name: Install System Packages
+  become: true
+  apt:
+    pkg:
+      - autoconf
+      - automake
+      - apt-transport-https
+      - build-essential
+      - clang-format
+      - cmake
+      - curl
+      - gettext
+      - gimp
+      - git
+      - global
+      - htop
+      - libfreetype6-dev
+      - libfontconfig1-dev
+      - libxft-dev
+      - libx11-dev
+      - libxcb-xfixes0-dev
+      - libxcomposite-dev
+      - libxkbcommon-dev
+      - libtool
+      - libtool-bin
+      - libxinerama-dev
+      - lua5.1
+      - nload
+      - nvidia-settings
+      - pkg-config
+      - python3-pip
+      - software-properties-common
+      - stow
+      - terminator
+      - unzip
+      - vlc
+      - wget
+      - xclip
+      - xournal
+  tags:
+    - core
+- name: Yaml linters
+  become: true
+  apt:
+    name: ["yamllint", "ansible-lint"]
+  tags:
+    - core
+- name: Install Clang, GCC, Boost
+  become: true
+  apt:
+    pkg:
+      - clang
+      - clang-11
+      - clang-12
+      - clangd
+      - gcc
+      - g++
+      - libboost-all-dev
+  tags:
+    - core
+- name: Java Development Kit
+  become: true
+  apt:
+    name: ["default-jdk"]
+  tags:
+    - core
+- name: Install Neovim deps
+  become: true
+  apt:
+    name: ["python3-neovim", "python3-venv", "fzf", "ripgrep"]
+  tags:
+    - core
+    - neovim
+- name: Install zsh deps
+  become: true
+  apt:
+    name: ["jq", "bc"]
+  tags:
+    - core
+    - zsh
+- name: Symbolic link from python3 to python
+  become: true
+  file:
+    src: "/usr/bin/python3"
+    dest: "/usr/bin/python"
+    state: link
+  tags:
+    - core

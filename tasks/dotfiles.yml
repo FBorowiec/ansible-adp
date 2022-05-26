@@ -1,0 +1,28 @@
+---
+- name: Install Stow
+  become: true
+  apt: name=stow
+  tags:
+  - stow
+  - dotfiles
+- name: Clone the dotfiles repo
+  become: true
+  become_user: "{{ main_user }}"
+  ansible.builtin.git:
+    repo: 'https://github.com/FBorowiec/dotfiles-adp.git'
+    dest: "{{ main_user_dir }}/dotfiles"
+    version: main
+  tags:
+    - stow
+    - dotfiles
+- name: Stow dotfiles
+  become: true
+  become_user: "{{ main_user }}"
+  ansible.builtin.command: "./install"
+  args:
+    chdir: "{{ main_user_dir }}/dotfiles"
+  register: dotfiles_install
+  changed_when: dotfiles_install.rc != 0
+  tags:
+    - stow
+    - dotfiles

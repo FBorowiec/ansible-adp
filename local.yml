@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  become: true
+  vars:
+    main_user: "{{ lookup('env', 'USER') }}"
+    main_user_dir: "/home/{{ lookup('env', 'USER') }}"
+  pre_tasks:
+    - name: Pre-run | update package cache (debian)
+      tags: always
+      apt: update_cache=yes
+      changed_when: false
+      when: ansible_distribution == ["Debian", "Ubuntu"]
+
+  tasks:
+    - include_tasks: tasks/core.yml
+    - include_tasks: tasks/fonts.yml
+    - include_tasks: tasks/tmux.yml
+    - include_tasks: tasks/node.yml
+    - include_tasks: tasks/npm-packages.yml
+    - include_tasks: tasks/pip-packages.yml
+    - include_tasks: tasks/neovim.yml
+    - include_tasks: tasks/zsh.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/bazel.yml
+    - include_tasks: tasks/cpp.yml
+    - include_tasks: tasks/snap.yml

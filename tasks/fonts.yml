@@ -1,0 +1,98 @@
+---
+- name: X/fonts - Create fonts directory
+  become: true
+  become_user: "{{ main_user }}"
+  file:
+    path: "{{ main_user_dir }}/.local/share/fonts/"
+    state: directory
+    mode: 0755
+  tags:
+    - fonts
+- name: X/fonts - Install monaco font
+  become: true
+  become_user: "{{ main_user }}"
+  copy:
+    src: files/monaco.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts"
+    mode: 0644
+  tags:
+    - fonts
+- name: Install font - Droid Sans Mono for Powerline Nerd Font Complete
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
+    dest: "{{ main_user_dir }}/.local/share/fonts/Droid_Sans_Mono_for_Powerline_Nerd_Font_Complete.otf"
+  tags:
+    - fonts
+- name: Install font - Hack Regular Nerd Font Complete
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts/Hack_Regular_Nerd_Font_Complete.ttf"
+  tags:
+    - fonts
+- name: Install font - MesloLGS NF Regular
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts/MesloLGS_NF_Regular.ttf"
+  tags:
+    - fonts
+- name: Install font - MesloLGS NF Bold
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts/MesloLGS_NF_Bold.ttf"
+  tags:
+    - fonts
+- name: Install font - MesloLGS NF Italic
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts/MesloLGS_NF_Italic.ttf"
+  tags:
+    - fonts
+- name: Install font - MesloLGS NF Bold Italic
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+    dest: "{{ main_user_dir }}/.local/share/fonts/MesloLGS_NF_Bold_Italic.ttf"
+  tags:
+    - fonts
+- name: Install font - Hermit medium mono
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hermit/Medium/complete/Hurmit%20Medium%20Nerd%20Font%20Complete%20Mono.otf
+    dest: "{{ main_user_dir }}/.local/share/fonts/Hurmit_Medium_Nerd_Font_Complete_Mono.otf"
+  tags:
+    - fonts
+- name: Install font - Hermit medium
+  become: true
+  become_user: "{{ main_user }}"
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hermit/Medium/complete/Hurmit%20Medium%20Nerd%20Font%20Complete.otf
+    dest: "{{ main_user_dir }}/.local/share/fonts/Hurmit_Medium_Nerd_Font_Complete.otf"
+  tags:
+    - fonts
+- name: Install additional fonts
+  become: true
+  apt:
+    name: ["fonts-powerline", "fonts-font-awesome", "fonts-firacode"]
+  tags:
+    - fonts
+- name: X/fonts - Refresh font cache
+  become: true
+  become_user: "{{ main_user }}"
+  ansible.builtin.command: fc-cache -fv
+  register: refreshed_font_cache
+  changed_when: refreshed_font_cache.rc != 0
+  failed_when: refreshed_font_cache.rc != 0
+  tags:
+    - fonts

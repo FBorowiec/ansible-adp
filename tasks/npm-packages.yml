@@ -1,0 +1,55 @@
+---
+- name: Install Yarn
+  npm:
+    name: yarn
+    global: true
+  tags:
+    - node
+- name: Install eslint
+  npm:
+    name: eslint
+    global: true
+  tags:
+    - node
+- name: Install bash lsp
+  npm:
+    name: bash-language-server
+    global: true
+  tags:
+    - node
+- name: Install lua formatter
+  npm:
+    name: lua-fmt
+    global: true
+  tags:
+    - node
+- name: Install jsonlint
+  npm:
+    name: jsonlint
+    global: true
+  tags:
+    - node
+- name: Install fixjson
+  npm:
+    name: fixjson
+    global: true
+  tags:
+    - node
+- name: Install markdownlint
+  npm:
+    name: markdownlint
+    global: true
+  tags:
+    - node
+- name: Install PG format
+  npm:
+    name: pg-format
+    global: true
+  tags:
+    - node
+- name: Install emojione
+  npm:
+    name: emojione
+    global: true
+  tags:
+    - node
