@@ -41,6 +41,7 @@
     src: "{{ main_user_dir }}/.cpptools/cpptools-linux/extension/debugAdapters/bin/cppdbg.ad7Engine.json"
     dest: "{{ main_user_dir }}/.cpptools/cpptools-linux/extension/debugAdapters/bin/nvim-dap.ad7Engine.json"
     state: hard
+    mode: 0644
   tags:
     - cpp
 - name: Cleanup
