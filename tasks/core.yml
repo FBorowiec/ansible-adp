@@ -36,6 +36,7 @@
       - lua5.1
       - nload
       - nvidia-settings
+      - pandoc
       - pkg-config
       - python3-pip
       - software-properties-common
