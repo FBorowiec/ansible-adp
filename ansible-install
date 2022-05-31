@@ -13,7 +13,7 @@ fi
 echo "Creating backup of current configuration..."
 [ ! -f ~/.config/gitignore ] || mv ~/.config/gitignore ~/.config/gitignore.bak
 [ ! -d ~/.config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak
-[ ! -f ~/.config/terminator/config ] || mv ~/.config/terminator/config  ~/config/terminator/config.bak
+[ ! -f ~/.config/terminator/config ] || mv ~/.config/terminator/config  ~/.config/terminator/config.bak
 [ ! -f ~/.gitconfig ] || mv ~/.gitconfig ~/.gitconfig.bak
 [ ! -f ~/.inputrc ] || mv ~/.inputrc ~/.inputrc.bak
 [ ! -d ~/.oh-my-zsh ] || mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
