@@ -10,7 +10,8 @@ And that's it.
 
 * Define a `git` user under `.gitconfig`
 * `tmux` -> `<Ctrl-b>I`
-* `cd ~/dotfiles` -> `nvim` -> `:PackerSync` (relaunch several times until all plugins install successfully
+* Add your id in: `git/.gitconfig`.
+* `cd ~/dotfiles` -> `nvim` -> `:PackerSync` (launch several times until all plugins install successfully)
 
 ### TODO
 

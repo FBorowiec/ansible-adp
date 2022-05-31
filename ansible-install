@@ -2,12 +2,25 @@
 
 set -e
 
+echo "Installing ansible..."
 if ! [ -x "$(command -v ansible)" ]; then
     # Installs ansible
     sudo apt-add-repository -y ppa:ansible/ansible
     sudo apt-get update -y
     sudo apt-get install -y curl git software-properties-common ansible
 fi
+
+echo "Creating backup of current configuration..."
+[ ! -f ~/.config/gitignore ] || mv ~/.config/gitignore ~/.config/gitignore.bak
+[ ! -d ~/.config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak
+[ ! -f ~/.config/terminator/config ] || mv ~/.config/terminator/config  ~/config/terminator/config.bak
+[ ! -f ~/.gitconfig ] || mv ~/.gitconfig ~/.gitconfig.bak
+[ ! -f ~/.inputrc ] || mv ~/.inputrc ~/.inputrc.bak
+[ ! -d ~/.oh-my-zsh ] || mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
+[ ! -f ~/.p10k.zsh ] || mv ~/.p10k.zsh ~/.p10k.zsh.bak
+[ ! -d ~/.tmux ] || mv ~/.tmux ~/.tmux.bak
+[ ! -f ~/.tmux.conf ] || mv ~/.tmux.conf ~/.tmux.conf.bak
+[ ! -f ~/.zshrc ] || mv ~/.zshrc ~/.zshrc.bak
 
 # Project root directory
 ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -17,6 +30,7 @@ HOSTS="$ROOTDIR/hosts"
 PLAYBOOK="$ROOTDIR/local.yml"
 
 # Runs Ansible playbook using user.
+echo "Running Ansible playbook..."
 ansible-playbook -i "$HOSTS" "$PLAYBOOK" --ask-become-pass
 
 if command -v terminal-notifier 1>/dev/null 2>&1; then
