@@ -85,7 +85,7 @@
     - zsh
 - name: Change shell
   become: true
-  ansible.builtin.command: chsh -s /usr/bin/zsh
+  ansible.builtin.command: "chsh -s /usr/bin/zsh"
   changed_when: false
   tags:
     - zsh
