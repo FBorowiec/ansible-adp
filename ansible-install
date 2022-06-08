@@ -10,17 +10,19 @@ if ! [ -x "$(command -v ansible)" ]; then
     sudo apt-get install -y curl git software-properties-common ansible
 fi
 
+TIMESTAMP=`date +%Y-%m-%d.%H:%M:%S`
+
 echo "Creating backup of current configuration..."
-[ ! -f ~/.config/gitignore ] || mv ~/.config/gitignore ~/.config/gitignore.bak
-[ ! -d ~/.config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak
-[ ! -f ~/.config/terminator/config ] || mv ~/.config/terminator/config  ~/.config/terminator/config.bak
-[ ! -f ~/.gitconfig ] || mv ~/.gitconfig ~/.gitconfig.bak
-[ ! -f ~/.inputrc ] || mv ~/.inputrc ~/.inputrc.bak
-[ ! -d ~/.oh-my-zsh ] || mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
-[ ! -f ~/.p10k.zsh ] || mv ~/.p10k.zsh ~/.p10k.zsh.bak
-[ ! -d ~/.tmux ] || mv ~/.tmux ~/.tmux.bak
-[ ! -f ~/.tmux.conf ] || mv ~/.tmux.conf ~/.tmux.conf.bak
-[ ! -f ~/.zshrc ] || mv ~/.zshrc ~/.zshrc.bak
+[ ! -f ~/.config/gitignore ] || mv ~/.config/gitignore gitignore.bak.${TIMESTAMP}
+[ ! -d ~/.config/nvim ] || mv ~/.config/nvim ~/.config/nvim.bak.${TIMESTAMP}
+[ ! -f ~/.config/terminator/config ] || mv ~/.config/terminator/config  ~/.config/terminator/config.bak.${TIMESTAMP}
+[ ! -f ~/.gitconfig ] || mv ~/.gitconfig ~/.gitconfig.bak.${TIMESTAMP}
+[ ! -f ~/.inputrc ] || mv ~/.inputrc ~/.inputrc.bak.${TIMESTAMP}
+[ ! -d ~/.oh-my-zsh ] || mv ~/.oh-my-zsh ~/.oh-my-zsh.bak.${TIMESTAMP}
+[ ! -f ~/.p10k.zsh ] || mv ~/.p10k.zsh ~/.p10k.zsh.bak.${TIMESTAMP}
+[ ! -d ~/.tmux ] || mv ~/.tmux ~/.tmux.bak.${TIMESTAMP}
+[ ! -f ~/.tmux.conf ] || mv ~/.tmux.conf ~/.tmux.conf.bak.${TIMESTAMP}
+[ ! -f ~/.zshrc ] || mv ~/.zshrc ~/.zshrc.bak.${TIMESTAMP}
 
 # Project root directory
 ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
