@@ -44,6 +44,12 @@
   when: not c.stat.exists
   tags:
     - cpp
+- name: Check debug adapter config exists
+  stat:
+    path: "{{ main_user_dir }}/.cpptools/cpptools-linux/extension/debugAdapters/bin/nvim-dap.ad7Engine.json"
+  register: d
+  tags:
+    - cpp
 - name: Create copy of json config
   become: true
   become_user: "{{ main_user }}"
@@ -52,7 +58,7 @@
     dest: "{{ main_user_dir }}/.cpptools/cpptools-linux/extension/debugAdapters/bin/nvim-dap.ad7Engine.json"
     state: hard
     mode: 0644
-  when: not c.stat.exists
+  when: not d.stat.exists
   tags:
     - cpp
 - name: Cleanup

@@ -3,6 +3,8 @@
   npm:
     name: "@bazel/bazelisk"
     global: true
+    unsafe_perm: true
+    force: true
   tags:
     - bazel
 - name: Check for bazel-compilation-database existence
