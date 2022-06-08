@@ -3,6 +3,7 @@
   npm:
     name: yarn
     global: true
+    unsafe_perm: true
   tags:
     - node
 - name: Install eslint
@@ -17,12 +18,12 @@
     global: true
   tags:
     - node
-- name: Install lua formatter
-  npm:
-    name: lua-fmt
-    global: true
-  tags:
-    - node
+# - name: Install lua formatter
+#   npm:
+#     name: lua-fmt
+#     global: true
+#   tags:
+#     - node
 - name: Install jsonlint
   npm:
     name: jsonlint
