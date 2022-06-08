@@ -5,6 +5,14 @@
     global: true
   tags:
     - bazel
+- name: Check for bazel-compilation-database existence
+  vars:
+    version: 0.5.2
+  stat:
+    path: "/usr/local/bin/bazel-compilation-database-{{ version }}/generate.sh"
+  register: p
+  tags:
+    - bazel
 - name: Download bazel-compilation-database
   become: true
   become_user: "{{ main_user }}"
@@ -13,6 +21,7 @@
   get_url:
     url: "https://github.com/grailbio/bazel-compilation-database/archive/refs/tags/{{ version }}.tar.gz"
     dest: "{{ main_user_dir }}/Downloads"
+  when: not p.stat.exists
   tags:
     - bazel
 - name: Install bazel compilation database
@@ -23,6 +32,7 @@
     src:
       "{{ main_user_dir }}/Downloads/bazel-compilation-database-{{ version }}.tar.gz"
     dest: "/usr/local/bin/"
+  when: not p.stat.exists
   tags:
     - bazel
 - name: Symbolic link bazel compdb
@@ -33,6 +43,15 @@
     src: "/usr/local/bin/bazel-compilation-database-{{ version }}/generate.sh"
     dest: "/usr/local/bin/bazel-compdb"
     state: link
+  when: not p.stat.exists
+  tags:
+    - bazel
+- name: Check buildifier exists
+  vars:
+    version: 0.5.2
+  stat:
+    path: "/usr/local/bin/bazel-compilation-database-{{ version }}/generate.sh"
+  register: b
   tags:
     - bazel
 - name: Install buildifier
@@ -42,6 +61,7 @@
   get_url:
     url: "https://github.com/bazelbuild/buildtools/releases/download/{{ version }}/buildifier-linux-amd64"
     dest: "/usr/local/bin/buildifier-linux-amd64"
+  when: not p.stat.exists
   tags:
     - bazel
 - name: Make buildifier executable
@@ -51,5 +71,6 @@
     dest: "/usr/local/bin/buildifier"
     mode: a+x
     state: link
+  when: not p.stat.exists
   tags:
     - bazel

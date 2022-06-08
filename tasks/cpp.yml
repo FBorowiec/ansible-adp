@@ -1,4 +1,10 @@
 ---
+- name: Check debug adapter exists
+  stat:
+    path: "/usr/local/bin/OpenDebugAD7"
+  register: c
+  tags:
+    - cpp
 - name: Download vscode-cpptools
   become: true
   become_user: "{{ main_user }}"
@@ -6,6 +12,7 @@
     url:
       "https://github.com/microsoft/vscode-cpptools/releases/download/1.7.1/cpptools-linux.vsix"
     dest: "{{ main_user_dir }}"
+  when: not c.stat.exists
   tags:
     - cpp
 - name: Create cpptools directory
@@ -15,6 +22,7 @@
     path: "{{ main_user_dir }}/.cpptools/cpptools-linux"
     state: directory
     mode: 0755
+  when: not c.stat.exists
   tags:
     - cpp
 - name: Extract cpptools
@@ -23,6 +31,7 @@
   ansible.builtin.unarchive:
     src: "{{ main_user_dir }}/cpptools-linux.vsix"
     dest: "{{ main_user_dir }}/.cpptools/cpptools-linux"
+  when: not c.stat.exists
   tags:
     - cpp
 - name: Make cpptools an executable
@@ -32,6 +41,7 @@
     dest: "/usr/local/bin/OpenDebugAD7"
     mode: a+x
     state: link
+  when: not c.stat.exists
   tags:
     - cpp
 - name: Create copy of json config
@@ -42,6 +52,7 @@
     dest: "{{ main_user_dir }}/.cpptools/cpptools-linux/extension/debugAdapters/bin/nvim-dap.ad7Engine.json"
     state: hard
     mode: 0644
+  when: not c.stat.exists
   tags:
     - cpp
 - name: Cleanup
@@ -49,5 +60,6 @@
   ansible.builtin.file:
     path: "{{ main_user_dir }}/cpptools-linux.vsix"
     state: absent
+  when: not c.stat.exists
   tags:
     - cpp

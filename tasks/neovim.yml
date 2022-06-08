@@ -34,6 +34,12 @@
   ignore_errors: true
   tags:
     - neovim
+- name: Check if Neovim directory exists
+  stat:
+    path: "{{ main_user_dir }}/neovim"
+  register: n
+  tags:
+    - neovim
 - name: Clone Neovim
   become: true
   become_user: "{{ main_user }}"
@@ -43,6 +49,7 @@
     repo: "https://github.com/neovim/neovim.git"
     dest: "{{ main_user_dir }}/neovim"
     version: nightly
+  when: not n.stat.exists
   tags:
     - neovim
 - name: Build neovim
@@ -53,6 +60,7 @@
     params:
       CMAKE_BUILD_TYPE=RelWithDebInfo
   register: build_neovim
+  when: not n.stat.exists
   tags:
     - neovim
 - name: Install neovim
@@ -63,5 +71,6 @@
   register: install_neovim
   changed_when: install_neovim.rc != 0
   failed_when: install_neovim.rc != 0
+  when: not n.stat.exists
   tags:
     - neovim

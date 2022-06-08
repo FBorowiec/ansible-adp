@@ -12,6 +12,7 @@
     repo: 'https://github.com/FBorowiec/dotfiles-adp.git'
     dest: "{{ main_user_dir }}/dotfiles"
     version: main
+    force: true
   tags:
     - stow
     - dotfiles
