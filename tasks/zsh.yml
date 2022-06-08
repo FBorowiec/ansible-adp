@@ -104,7 +104,7 @@
   replace:
     dest: "{{ main_user_dir }}/.bashrc"
     regexp: "zsh.*"
-    replace: "zshre && exitre"
+    replace: "zsh && exit"
   tags:
     - zsh
 - name: Launch zsh from bash (add missing line)
