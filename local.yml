@@ -10,6 +10,10 @@
       apt: update_cache=yes
       changed_when: false
       when: ansible_distribution == ["Debian", "Ubuntu"]
+  environment:
+    http_proxy: http://localhost:3128
+    https_proxy: https://localhost:3128
+    no_proxy: https://github.com
 
   tasks:
     - include_tasks: tasks/core.yml

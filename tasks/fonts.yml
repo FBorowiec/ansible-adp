@@ -25,14 +25,14 @@
 #     dest: "{{ main_user_dir }}/.local/share/fonts/Droid_Sans_Mono_for_Powerline_Nerd_Font_Complete.otf"
 #   tags:
 #     - fonts
-- name: Install font - Hack Regular Nerd Font Complete
-  become: true
-  become_user: "{{ main_user }}"
-  get_url:
-    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
-    dest: "{{ main_user_dir }}/.local/share/fonts/Hack_Regular_Nerd_Font_Complete.ttf"
-  tags:
-    - fonts
+# - name: Install font - Hack Regular Nerd Font Complete
+#   become: true
+#   become_user: "{{ main_user }}"
+#   get_url:
+#     url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf
+#     dest: "{{ main_user_dir }}/.local/share/fonts/Hack_Regular_Nerd_Font_Complete.ttf"
+#   tags:
+#     - fonts
 - name: Install font - MesloLGS NF Regular
   become: true
   become_user: "{{ main_user }}"

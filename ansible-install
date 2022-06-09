@@ -25,6 +25,10 @@ echo "Creating backup of current configuration..."
 [ ! -f ~/.tmux.conf ] || mv ~/.tmux.conf ~/.tmux.conf.bak.${TIMESTAMP}
 [ ! -f ~/.zshrc ] || mv ~/.zshrc ~/.zshrc.bak.${TIMESTAMP}
 
+echo "Setting up proxy for git..."
+git config --global http.proxy http://localhost:3128
+git config --global https.proxy https://localhost:3128
+
 # Project root directory
 ROOTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Host file location
